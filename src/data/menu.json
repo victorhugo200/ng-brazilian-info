@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "title": "Home",
+        "route": "/home",
+        "hasDropdown": false
+    },
+    {
+        "id": 2,
+        "title": "Consultar empresa",
+        "route": "/companys",
+        "hasDropdown": false
+    },
+    {
+        "id": 3,
+        "title": "Bancos",
+        "hasDropdown": true,
+        "dropdownList": [
+            {
+                "title": "Informações de todos os bancos",
+                "route": "/allbanks"
+            },
+            {
+                "title": "Informações por código do banco",
+                "route": "/bank-for-code"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Taxas",
+        "hasDropdown": true,
+        "dropdownList": [
+            {
+                "title": "Taxas de juros",
+                "route": "/allbanks"
+            },
+            {
+                "title": "Taxas de juros por siglas/nome",
+                "route": "/bank-for-code"
+            }
+        ]
+    }
+]
