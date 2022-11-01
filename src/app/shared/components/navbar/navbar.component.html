@@ -4,7 +4,7 @@
             <a [routerLink]="['/home']" class="header-brand fs-2 text-white text-decoration-none">Brazilian Info</a>
             <nav class="header-nav">
                 <ul class="d-flex list-unstyled m-0">
-                    <li *ngFor="let item of menuList; let index = index" class="dropdown p-1">
+                    <li *ngFor="let item of navbarList; let index = index" class="dropdown p-1">
                         <div *ngIf="!item.hasDropdown; else showDropdown">
                             <a class="text-white p-0 text-decoration-none" appDarkenHover [routerLink]="item.route">
                                 {{ item.title }}
