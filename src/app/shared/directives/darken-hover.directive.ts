@@ -15,12 +15,10 @@ export class DarkenHoverDirective {
   @HostListener('mouseover')
   public onMouseOver() {
     this.renderer.setStyle(this.el.nativeElement, 'filter', 'brightness(0.9)');
-    console.log('mouse over');
   }
 
   @HostListener('mouseleave')
   public onMouseLeave() {
-    console.log('mouse leave');
     this.renderer.setStyle(this.el.nativeElement, 'filter', 'none');
   }
 }
