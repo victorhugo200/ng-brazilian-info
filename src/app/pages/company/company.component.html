@@ -1,0 +1,41 @@
+<section class="company py-5">
+    <div class="container">
+        <div class="mb-3">
+            <label for="company" class="form-label fw-bold">CNPJ</label>
+            <input type="email" class="form-control" id="company" placeholder="Digite o cnpj da empresa"
+                autocomplete="off" [formControl]="controlCNPJ" />
+            <app-message-error *ngIf="controlCNPJ.touched && controlCNPJ.hasError('required')" text="Este campo é
+                obrigatório"></app-message-error>
+            <app-message-error *ngIf="controlCNPJ.touched && controlCNPJ.hasError('cnpjInvalid')" text="Este cnpj
+                é inválido. Deve conter 14 números exatos independente da
+                máscara utilizada."></app-message-error>
+        </div>
+
+        <ng-container>
+            <p class="text-center pt-5" *ngIf="emptyInfo; else templateInfo">
+                Realize uma busca para as informações serem listadas ;)
+            </p>
+            <ng-template #templateInfo>
+                <div class="d-flex justify-content-center mt-5" *ngIf="isLoading; else templateCompany">
+                    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+
+                <ng-template #templateCompany>
+                    <div *ngIf="company$ | async as company; else templateError" class="row mt-5">
+                        <div class="text-center pt-3">
+                            <h2>{{ company.razao_social }}</h2>
+                            <h4>CNPJ: {{ company.cnpj | cnpj }}</h4>
+                        </div>
+                        <app-service [company]="company"></app-service>
+                        <app-partners [partners]="company.qsa"></app-partners>
+                    </div>
+                    <ng-template #templateError>
+                        <app-template-error [text]="'O CNPJ informando não existe!'"></app-template-error>
+                    </ng-template>
+                </ng-template>
+            </ng-template>
+        </ng-container>
+    </div>
+</section>

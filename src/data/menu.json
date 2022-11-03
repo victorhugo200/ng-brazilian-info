@@ -8,7 +8,7 @@
     {
         "id": 2,
         "title": "Consultar empresa",
-        "route": "/companys",
+        "route": "/company",
         "hasDropdown": false
     },
     {
