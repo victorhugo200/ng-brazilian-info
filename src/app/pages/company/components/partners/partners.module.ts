@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PartnersComponent } from './partners.component';
-import { ListPartnersModule } from './list-partners/list-partners.module';
+import { ListPartnersModule } from './components/list-partners/list-partners.module';
 
 @NgModule({
   declarations: [PartnersComponent],

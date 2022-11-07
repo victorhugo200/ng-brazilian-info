@@ -8,6 +8,7 @@ import {
   filter,
   map,
   Observable,
+  tap,
 } from 'rxjs';
 import { Company } from 'src/app/shared/models/company.model';
 import { cnpjValidator } from 'src/app/shared/validators/cnpj.validator';
@@ -23,7 +24,8 @@ export class CompanyComponent implements OnInit {
   controlCNPJ = new FormControl('', [Validators.required, cnpjValidator()]);
   isLoading = false;
   emptyInfo = true;
-  company$!: Observable<Company>;
+  hasError = false;
+  company$!: Observable<Company | any>;
 
   constructor(private companyService: CompanyService) {}
 
@@ -34,15 +36,22 @@ export class CompanyComponent implements OnInit {
         distinctUntilChanged(),
         filter(() => this.controlCNPJ.valid),
         map((val: string) => {
-          this.isLoading = true;
           this.emptyInfo = false;
-          const cnpj = val.replace(/[^0-9]/g, '');
+          const cnpj = val.replace(/[^0-9]/g, '').trim();
           return cnpj;
+        }),
+        tap(() => {
+          this.isLoading = true;
         })
       )
       .subscribe((cnpj) => {
-        this.company$ = this.companyService.getCompany(cnpj);
-        this.isLoading = false;
+        this.company$ = this.companyService.getCompany(cnpj).pipe(
+          catchError((error) => {
+            this.hasError = true;
+            return error;
+          })
+        );
+        setTimeout(() => (this.isLoading = false), 200);
       });
   }
 }
