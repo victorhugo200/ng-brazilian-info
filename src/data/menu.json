@@ -18,11 +18,11 @@
         "dropdownList": [
             {
                 "title": "Informações de todos os bancos",
-                "route": "/allbanks"
+                "route": "/bank/all"
             },
             {
                 "title": "Informações por código do banco",
-                "route": "/bank-for-code"
+                "route": "bank/info"
             }
         ]
     },
