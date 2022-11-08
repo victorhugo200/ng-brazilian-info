@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import {
   catchError,
   debounceTime,
+  delay,
   distinctUntilChanged,
   filter,
   map,
@@ -21,37 +22,32 @@ import { CompanyService } from './services/company.service';
   providers: [CompanyService],
 })
 export class CompanyComponent implements OnInit {
-  controlCNPJ = new FormControl('', [Validators.required, cnpjValidator()]);
   isLoading = false;
   emptyInfo = true;
   hasError = false;
-  company$!: Observable<Company | any>;
+  company!: Company | undefined;
 
   constructor(private companyService: CompanyService) {}
 
-  ngOnInit(): void {
-    this.controlCNPJ.valueChanges
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-        filter(() => this.controlCNPJ.valid),
-        map((val: string) => {
-          this.emptyInfo = false;
-          const cnpj = val.replace(/[^0-9]/g, '').trim();
-          return cnpj;
-        }),
-        tap(() => {
-          this.isLoading = true;
-        })
-      )
-      .subscribe((cnpj) => {
-        this.company$ = this.companyService.getCompany(cnpj).pipe(
-          catchError((error) => {
-            this.hasError = true;
-            return error;
-          })
-        );
-        setTimeout(() => (this.isLoading = false), 200);
-      });
+  ngOnInit(): void {}
+
+  getCompany(cnpj: string) {
+    this.emptyInfo = false;
+    this.company = undefined;
+    this.isLoading = true;
+    this.companyService
+      .getCompany(cnpj)
+      .pipe(delay(300))
+      .subscribe(
+        (res) => {
+          this.company = res;
+          this.isLoading = false;
+          this.hasError = false;
+        },
+        (error) => {
+          this.hasError = true;
+          this.isLoading = false;
+        }
+      );
   }
 }

@@ -1,15 +1,6 @@
 <section class="company py-5">
     <div class="container">
-        <div class="mb-3">
-            <label for="company" class="form-label fw-bold">CNPJ</label>
-            <input type="text" class="form-control" id="company" placeholder="Digite o cnpj da empresa"
-                autocomplete="off" [formControl]="controlCNPJ" />
-            <app-message-error *ngIf="controlCNPJ.touched && controlCNPJ.hasError('required')" text="Este campo é
-                obrigatório"></app-message-error>
-            <app-message-error *ngIf="controlCNPJ.touched && controlCNPJ.hasError('cnpjInvalid')" text="Este cnpj
-                é inválido. Deve conter 14 números exatos independente da
-                máscara utilizada."></app-message-error>
-        </div>
+        <app-search-company class="mb-3" (cnpjEmitter)="getCompany($event)"></app-search-company>
         <ng-container>
             <p class="text-center pt-5" *ngIf="emptyInfo; else templateInfo">
                 Realize uma busca para as informações serem listadas ;)
@@ -20,16 +11,17 @@
                 </div>
 
                 <ng-template #templateCompany>
-                    <div *ngIf="company$ | async as company;" class="row mt-5">
+                    <div *ngIf="!!company" class="row mt-5">
                         <div class="text-center mb-2 mb-sm-1 mpt-3">
                             <h2>{{ company.razao_social }}</h2>
                             <h4>CNPJ: {{ company.cnpj | cnpj }}</h4>
                         </div>
                         <app-service [company]="company"></app-service>
-                        <app-partners [partners]="company.qsa"></app-partners>
+                        <app-partners *ngIf="!!company.qsa" [partners]="company.qsa"></app-partners>
                     </div>
-
-                    <app-template-error *ngIf="hasError" [text]="'O CNPJ informando não existe!'"></app-template-error>
+                    <app-template-error *ngIf="hasError"
+                        [text]="'Parece que não existe nenhuma empresa com este CNPJ. Por favor, verifique e faça uma nova consulta!'">
+                    </app-template-error>
                 </ng-template>
 
             </ng-template>

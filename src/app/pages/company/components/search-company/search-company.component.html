@@ -1,0 +1,10 @@
+<div>
+    <label for="company" class="form-label fw-bold">CNPJ</label>
+    <input type="search" class="form-control" id="company" placeholder="Digite o cnpj da empresa" autocomplete="off"
+        [formControl]="search" />
+</div>
+<app-message-error *ngIf="search.touched && search.hasError('required')" text="Este campo é
+    obrigatório"></app-message-error>
+<app-message-error *ngIf="search.touched && search.hasError('cnpjInvalid')" text="Este cnpj
+    é inválido. Deve conter 14 números exatos independente da
+    máscara utilizada."></app-message-error>
