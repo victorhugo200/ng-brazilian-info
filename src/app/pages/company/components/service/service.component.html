@@ -1,0 +1,10 @@
+<div class="service">
+    <div class="mb-3">
+        <h3>Serviço principal:</h3>
+        <span>{{ company.cnae_fiscal_descricao }}</span>
+    </div>
+    <div *ngIf="company.cnaes_secundarios.length > 1">
+        <h3>Outros serviços</h3>
+        <app-list-services [services]="company.cnaes_secundarios"></app-list-services>
+    </div>
+</div>
