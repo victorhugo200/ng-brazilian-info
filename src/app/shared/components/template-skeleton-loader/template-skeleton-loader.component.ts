@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { SkeletonWidth } from '../../models/template-skeleton-loader.model';
 
 @Component({
   selector: 'app-template-skeleton-loader',
@@ -13,6 +14,10 @@ import {
 })
 export class TemplateSkeletonLoaderComponent implements OnInit {
   @Input() totalCols = 10;
+  @Input() skeletonWidth: SkeletonWidth = {
+    first: '100%',
+    secondary: '50%',
+  };
   cols: number[] = [];
   constructor() {}
 
