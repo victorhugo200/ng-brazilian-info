@@ -12,10 +12,11 @@ export class AllBanksComponent implements OnInit {
   banks: Bank[] = [];
   allBanks: Bank[] = [];
   isLoading = false;
-  totalItems = 3;
+  totalItems = 12;
   page = 1;
   showTemplateLoadMore = false;
   showButtonLoadMore = false;
+
   constructor(private bankService: BankService) {}
 
   ngOnInit(): void {
@@ -39,12 +40,13 @@ export class AllBanksComponent implements OnInit {
 
   async loadMore() {
     this.page++;
-    this.showButtonLoadMore = this.hasBanks();
+    this.showButtonLoadMore = false;
     this.showTemplateLoadMore = true;
     await setTimeout(() => {
       this.banks = [...this.banks, ...this.paginate(this.page, this.allBanks)];
+      this.showButtonLoadMore = this.hasBanks();
       this.showTemplateLoadMore = false;
-    }, 1000);
+    }, 2000);
   }
 
   private paginate(page: number, list: Bank[]) {

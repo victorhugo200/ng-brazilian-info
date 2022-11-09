@@ -14,13 +14,11 @@
                     </app-card>
                 </li>
             </ul>
-            <div *ngIf="showTemplateLoadMore" class="d-flex justify-content-center py-3">
-                <h1>CARREGANDO...</h1>
-            </div>
-            <div class="d-flex justify-content-center py-3">
-                <button *ngIf="showButtonLoadMore" class="btn btn-primary" (click)="loadMore()">Carregar mais
-                    dados</button>
-            </div>
+
+            <app-template-skeleton-loader *ngIf="showTemplateLoadMore" [totalCols]="12">
+            </app-template-skeleton-loader>
+
+            <app-button-load-more [isLoadMore]="showButtonLoadMore" (loadMore)="loadMore()"></app-button-load-more>
         </ng-template>
     </div>
 </section>
