@@ -1,16 +1,14 @@
 <ul class="list-partners">
     <li *ngFor="let partner of partners" class="py-2">
-        <div class="card text-white bg-primary">
-            <div class="card-body">
-                <div>
-                    <span class="fw-bold">Sócio:</span>
-                    <span> {{ partner.nome_socio }}</span>
-                </div>
-                <div>
-                    <span class="fw-bold">Cargo:</span>
-                    <span> {{ partner?.qualificacao_representante_legal }}</span>
-                </div>
+        <app-card>
+            <div>
+                <span class="fw-bold">Sócio:</span>
+                <span> {{ partner.nome_socio }}</span>
             </div>
-        </div>
+            <div>
+                <span class="fw-bold">Cargo:</span>
+                <span> {{ partner?.qualificacao_representante_legal }}</span>
+            </div>
+        </app-card>
     </li>
 </ul>

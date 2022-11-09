@@ -1,3 +1,26 @@
 <section class="banks pt-5">
-    <h2 class="text-center">Lista de todos os bancos no brasil</h2>
+    <h2 class="text-center mb-5">Lista de todos os bancos no brasil</h2>
+    <div class="container">
+        <div class="text-center" *ngIf="isLoading; else templateBanks">
+            <app-loading [isLoading]="true"></app-loading>
+        </div>
+
+        <ng-template #templateBanks>
+            <ul class="list-unstyled row">
+                <li *ngFor="let bank of banks" class="col-4 mb-3">
+                    <app-card class="bank-card">
+                        <h5 class="title">{{ bank.fullName}} </h5>
+                        <span class="ispb"><strong>ISPB:</strong> {{ bank.ispb }}</span>
+                    </app-card>
+                </li>
+            </ul>
+            <div *ngIf="showTemplateLoadMore" class="d-flex justify-content-center py-3">
+                <h1>CARREGANDO...</h1>
+            </div>
+            <div class="d-flex justify-content-center py-3">
+                <button *ngIf="showButtonLoadMore" class="btn btn-primary" (click)="loadMore()">Carregar mais
+                    dados</button>
+            </div>
+        </ng-template>
+    </div>
 </section>
