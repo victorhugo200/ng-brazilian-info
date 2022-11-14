@@ -17,6 +17,7 @@
                 <li *ngFor="let bank of banks" class="col-12 col-md-4 mb-3">
                     <app-card class="bank-card">
                         <h5 class="title">{{ bank.fullName }}</h5>
+                        <span *ngIf="bank.code" class="ispb"><strong>Código:</strong> {{ bank.code }}</span>
                         <span class="ispb"><strong>ISPB:</strong> {{ bank.ispb }}</span>
                     </app-card>
                 </li>
@@ -35,11 +36,9 @@
         </ng-container>
 
         <ng-container *ngIf="hasError">
-
             <app-card>
                 <app-template-error [text]="'Por favor, tente novamente mais tarde.'"></app-template-error>
             </app-card>
-
         </ng-container>
     </div>
 </section>

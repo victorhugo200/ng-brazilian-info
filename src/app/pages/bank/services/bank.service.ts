@@ -16,7 +16,7 @@ export class BankService {
     return this.http.get<Bank[]>(this.baseURL);
   }
 
-  getBank(ispb: string): Observable<Bank> {
-    return this.http.get<Bank>(this.baseURL + ispb);
+  getBank(code: string): Observable<Bank> {
+    return this.http.get<Bank>(`${this.baseURL}/${code}`);
   }
 }

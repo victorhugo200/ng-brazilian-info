@@ -13,6 +13,11 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'info',
+        loadChildren: () =>
+          import('./feature/info/info.module').then((m) => m.InfoModule),
+      },
+      {
         path: '',
         redirectTo: 'all',
       },
