@@ -1,0 +1,44 @@
+<section class="banks pt-5">
+    <h2 class="text-center mb-5">Lista de todos os bancos no brasil</h2>
+
+    <div class="container">
+
+        <div class="text-center py-5" *ngIf="isLoading">
+            <app-loading [isLoading]="true"></app-loading>
+        </div>
+
+        <ng-container *ngIf="!isLoading && !hasError">
+            <div class="mb-3 w-100 w-md-50">
+                <app-input-search [search]="search" label="Filtrar banco:"
+                    placeholder="Busque um banco pelo nome ou isbp. Ex: Banco do Brasil ou 00000000.">
+                </app-input-search>
+            </div>
+            <ul class="list-unstyled row" *ngIf="banks.length; else emptyResults">
+                <li *ngFor="let bank of banks" class="col-12 col-md-4 mb-3">
+                    <app-card class="bank-card">
+                        <h5 class="title">{{ bank.fullName }}</h5>
+                        <span *ngIf="bank.code" class="ispb"><strong>Código:</strong> {{ bank.code }}</span>
+                        <span class="ispb"><strong>ISPB:</strong> {{ bank.ispb }}</span>
+                    </app-card>
+                </li>
+            </ul>
+            <ng-template #emptyResults>
+                <app-card>
+                    <app-feedback [title]="'Ops! Não encontramos nenhum banco'"
+                        [description]="'Por favor, refaça a sua consulta.'" [icon]="'bi-info-circle'"></app-feedback>
+                </app-card>
+            </ng-template>
+
+            <app-template-skeleton-loader *ngIf="showTemplateLoadMore" [totalCols]="12">
+            </app-template-skeleton-loader>
+
+            <app-button-load-more [isLoadMore]="showButtonLoadMore" (loadMore)="loadMore()"></app-button-load-more>
+        </ng-container>
+
+        <ng-container *ngIf="hasError">
+            <app-card>
+                <app-template-error [text]="'Por favor, tente novamente mais tarde.'"></app-template-error>
+            </app-card>
+        </ng-container>
+    </div>
+</section>

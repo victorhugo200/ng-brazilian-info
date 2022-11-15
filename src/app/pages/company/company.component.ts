@@ -22,10 +22,10 @@ import { CompanyService } from './services/company.service';
   providers: [CompanyService],
 })
 export class CompanyComponent implements OnInit {
-  isLoading = false;
-  emptyInfo = true;
-  hasError = false;
-  company!: Company | undefined;
+  public isLoading = false;
+  public emptyInfo = true;
+  public hasError = false;
+  public company!: Company | undefined;
 
   constructor(private companyService: CompanyService) {}
 

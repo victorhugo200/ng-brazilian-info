@@ -1,0 +1,46 @@
+<section class="pt-5">
+    <h2 class="text-center pb-5">Obtenha informações de um banco específico</h2>
+    <div class="container">
+        <app-input-search label="Código do banco:" placeholder="Digite o código do banco. Ex: 1, 70 ou 430."
+            [search]="search">
+        </app-input-search>
+
+        <div class="mt-2">
+            <app-card>
+
+                <app-info-loader [isLoading]="isLoading"></app-info-loader>
+
+                <div *ngIf="!!info">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-bank fs-2"></i>
+                        <h6>{{ info.name }}</h6>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex flex-column align-items-center">
+                                <span class="text-center mb-3 fw-bold">ISPB</span>
+                                <span>{{ info.ispb }}</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column align-items-center">
+                                <span class="text-center mb-3 fw-bold">Código</span>
+                                <span>{{ info.code }}</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column align-items-center ">
+                                <span class="text-center mb-3 fw-bold">Instituição</span>
+                                <span>{{ info.fullName }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <app-template-info *ngIf="feedback.show" [title]="feedback.title" [description]="feedback.description">
+                </app-template-info>
+                <app-template-error *ngIf="showTemplateError" [text]="'Por favor, tente novamente mais tarde.'">
+                </app-template-error>
+            </app-card>
+        </div>
+    </div>
+</section>

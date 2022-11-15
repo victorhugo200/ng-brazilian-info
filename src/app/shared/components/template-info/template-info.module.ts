@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TemplateErrorComponent } from './template-error.component';
+import { TemplateInfoComponent } from './template-info.component';
 import { FeedbackModule } from '../feedback/feedback.module';
 
 @NgModule({
-  declarations: [TemplateErrorComponent],
+  declarations: [TemplateInfoComponent],
   imports: [CommonModule, FeedbackModule],
-  exports: [TemplateErrorComponent],
+  exports: [TemplateInfoComponent],
 })
-export class TemplateErrorModule {}
+export class TemplateInfoModule {}
