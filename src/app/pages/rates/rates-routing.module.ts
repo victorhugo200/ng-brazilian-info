@@ -13,6 +13,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'abbreviation',
+        loadChildren: () =>
+          import('./feature/abbreviation/abbreviation.module').then(
+            (m) => m.AbbreviationModule
+          ),
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: 'all',
