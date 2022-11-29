@@ -26,7 +26,6 @@ export class AllRatesComponent implements OnInit {
       .pipe(delay(3000))
       .subscribe(
         (rates) => {
-          console.log(rates);
           this.rates = rates;
           this.showLoader = false;
           this.hasError = false;

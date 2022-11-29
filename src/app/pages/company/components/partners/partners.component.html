@@ -1,4 +1,9 @@
 <div class="partners">
     <h3>Sócios:</h3>
     <app-list-partners [partners]="partners"></app-list-partners>
+    <div class="d-flex justify-content-center">
+        <button *ngIf="showButtonLoadMore" class="btn btn-primary" (click)="loadMore()">LoadMore </button>
+    </div>
+    <app-template-skeleton-loader *ngIf="showTemplateLoadMore" [totalCols]="pageSize">
+    </app-template-skeleton-loader>
 </div>

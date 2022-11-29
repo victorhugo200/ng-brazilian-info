@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, delay, tap } from 'rxjs';
+import { paginate, paginateHasItems } from 'src/app/shared/utils/paginate';
 import { Bank } from '../../model/bank.model';
 import { BankService } from '../../services/bank.service';
 
@@ -33,18 +34,10 @@ export class AllBanksComponent implements OnInit {
     this.showButtonLoadMore = false;
     this.showTemplateLoadMore = true;
     await setTimeout(() => {
-      this.banks = [...this.banks, ...this.paginate(this.page, this.allBanks)];
-      this.showButtonLoadMore = this.hasBanks();
+      this.banks = [...this.banks, ...paginate(this.page, this.allBanks)];
+      this.showButtonLoadMore =  paginateHasItems(this.page, this.allBanks);
       this.showTemplateLoadMore = false;
     }, 2000);
-  }
-
-  paginate(page: number, list: Bank[]) {
-    return list.slice((page - 1) * this.totalItems, page * this.totalItems);
-  }
-
-  hasBanks() {
-    return this.paginate(this.page, this.allBanks).length ? true : false;
   }
 
   onFilterBanks() {
@@ -61,8 +54,8 @@ export class AllBanksComponent implements OnInit {
             this.banks = banksFiltered;
             this.isLoading = false;
           } else {
-            this.banks = this.paginate(this.page, this.allBanks);
-            this.showButtonLoadMore = this.hasBanks();
+            this.banks = paginate(this.page, this.allBanks);
+            this.showButtonLoadMore = paginateHasItems(this.page, this.allBanks);;
             this.isLoading = false;
           }
         }, 500);
@@ -97,8 +90,8 @@ export class AllBanksComponent implements OnInit {
         (res) => {
           this.isLoading = false;
           this.allBanks = res;
-          this.showButtonLoadMore = this.hasBanks();
-          this.banks = this.paginate(this.page, res);
+          this.showButtonLoadMore = paginateHasItems(this.page, this.allBanks);
+          this.banks = paginate(this.page, res);
         },
         (error) => {
           this.isLoading = false;
