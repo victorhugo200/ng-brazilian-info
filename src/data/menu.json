@@ -33,11 +33,11 @@
         "dropdownList": [
             {
                 "title": "Taxas de juros",
-                "route": "/allbanks"
+                "route": "/rates/all"
             },
             {
                 "title": "Taxas de juros por siglas/nome",
-                "route": "/bank-for-code"
+                "route": "/rates/abbreviation"
             }
         ]
     }

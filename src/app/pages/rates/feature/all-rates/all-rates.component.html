@@ -1,0 +1,31 @@
+<section class="pt-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Taxas de juros</h2>
+        <app-template-skeleton-loader *ngIf="showLoader" [totalCols]="3" [skeletonWidth]="skeletonWidth">
+        </app-template-skeleton-loader>
+        <div *ngIf="!showLoader">
+            <div *ngIf="!hasError && rates.length; else templateError">
+                <ol class="row list-unstyled">
+                    <li class="col-md-4" *ngFor="let rate of rates">
+                        <app-card>
+                            <div class="d-flex flex-column align-items-start">
+                                <span class="fs-5 fw-bold">{{ rate.nome | uppercase }}</span>
+                                <span class="fs-3"
+                                    [ngClass]="{'text-success': rate.valor >= 0, 'text-danger': rate.valor < 0}">
+                                    {{ rate.valor }}%</span>
+                            </div>
+                        </app-card>
+                    </li>
+                </ol>
+            </div>
+            <ng-template #templateError>
+                <app-card>
+                    <app-template-error [text]="'Ocorreu um erro interno. Por favor, tente novamente mais tarde.'">
+                    </app-template-error>
+                </app-card>
+            </ng-template>
+
+        </div>
+
+    </div>
+</section>
