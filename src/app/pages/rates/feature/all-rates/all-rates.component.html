@@ -6,7 +6,7 @@
         <div *ngIf="!showLoader">
             <div *ngIf="!hasError && rates.length; else templateError">
                 <ol class="row list-unstyled">
-                    <li class="col-md-4" *ngFor="let rate of rates">
+                    <li class="col-md-4 py-2 py-md-0" *ngFor="let rate of rates">
                         <app-card>
                             <div class="d-flex flex-column align-items-start">
                                 <span class="fs-5 fw-bold">{{ rate.nome | uppercase }}</span>
